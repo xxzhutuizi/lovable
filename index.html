@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="药药的旅程：可交互的药学人格测试、药药的小屋 3D 模型、研发地图、四个场景与三个故事结局。"
+    />
+    <meta name="theme-color" content="#385442" />
+    <title>药药的旅程 · 一颗新药的成长日记</title>
+    <script type="module" crossorigin src="/lovable/assets/index-eyv7rzoN.js"></script>
+    <link rel="stylesheet" crossorigin href="/lovable/assets/index-B9wjXCkG.css">
+  </head>
+  <body>
+    <div class="paper-grain" aria-hidden="true"></div>
+    <header class="site-header" id="site-header">
+      <a class="brand" href="#home" aria-label="返回首页">
+        <span class="brand-seed" aria-hidden="true"></span>
+        <span>
+          <b>药药的旅程</b>
+          <small>一颗新药的成长日记</small>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="主导航">
+        <a href="#cabin">3D小屋</a>
+        <a href="#personality">药学人格</a>
+        <a href="#map">研发地图</a>
+        <a href="#journey">四站旅程</a>
+        <a href="#world">合并场景</a>
+        <a href="#endings">三个结局</a>
+      </nav>
+      <a class="present-button" href="#world">开始探索</a>
+    </header>
+
+    <main>
+      <section class="hero poster-hero" id="home">
+        <img
+          class="hero-poster"
+          src="./assets/poster.png"
+          alt="药药的旅程海报，展示新药研发之路、药药角色和四个研发场景"
+        />
+      </section>
+
+      <section class="section cabin-section" id="cabin">
+        <header class="section-heading">
+          <div>
+            <p class="eyebrow">PHARMACY COTTAGE · 3D</p>
+            <h2>药药的小屋</h2>
+          </div>
+          <p>
+            拖动旋转木屋，滚轮或双指缩放。点击纪念品柜、研究日记、研发地图、信箱和药药，
+            打开小屋里的研究记录。
+          </p>
+        </header>
+        <div class="stage-frame cabin-frame">
+          <canvas id="cabin-canvas" aria-label="可拖动和缩放的三维药药小屋"></canvas>
+          <div class="stage-topbar">
+            <span class="live-dot">3D 交互</span>
+            <span>拖拽旋转 · 滚轮缩放 · 点击物件</span>
+          </div>
+          <div class="stage-toolbar" aria-label="小屋视角工具">
+            <button type="button" data-cabin-action="reset">回到全景</button>
+            <button type="button" data-cabin-action="rotate">自动旋转</button>
+          </div>
+          <div class="loading-pill" id="cabin-loading">正在布置小屋…</div>
+        </div>
+      </section>
+
+      <section class="section personality-section" id="personality">
+        <header class="section-heading section-heading-tight">
+          <div>
+            <p class="eyebrow">FOUR PERSPECTIVES</p>
+            <h2>你的药学人格，<br />是哪一个出发视角？</h2>
+          </div>
+          <p>
+            人格只是一扇观察窗口。四种视角没有高下，四个场景也都可以自由探索。
+          </p>
+        </header>
+        <div class="persona-grid" id="persona-grid"></div>
+        <div class="quiz-banner">
+          <div>
+            <p class="eyebrow">5 QUESTIONS · NO WRONG ANSWERS</p>
+            <h3>看看你最先从哪个方向理解新药研发</h3>
+          </div>
+          <button class="button button-light" id="start-quiz" type="button">
+            开始五问小测试
+          </button>
+        </div>
+      </section>
+
+      <section class="section map-section" id="map">
+        <header class="section-heading">
+          <div>
+            <p class="eyebrow">RESEARCH ATLAS</p>
+            <h2>研发地图</h2>
+          </div>
+          <p>四个观察站可按任意顺序探索。点击地图上的站点，前往对应的研究场景。</p>
+        </header>
+        <div class="map-layout">
+          <div class="map-board">
+            <div class="map-title">
+              <span>药药的研究旅行图</span>
+              <small>点击站点继续</small>
+            </div>
+            <svg
+              class="research-map"
+              viewBox="0 0 1000 640"
+              role="img"
+              aria-label="药药的小屋与四个研发站点"
+            >
+              <defs>
+                <pattern id="map-paper" width="40" height="40" patternUnits="userSpaceOnUse">
+                  <rect width="40" height="40" fill="#efe2c6" />
+                  <circle cx="10" cy="12" r="1" fill="#d8c5a0" />
+                  <circle cx="30" cy="28" r="1.2" fill="#d8c5a0" />
+                </pattern>
+                <filter id="soft-noise">
+                  <feTurbulence baseFrequency="0.014" numOctaves="2" seed="5" />
+                  <feDisplacementMap in="SourceGraphic" scale="5" />
+                </filter>
+              </defs>
+              <rect width="1000" height="640" fill="url(#map-paper)" />
+              <path
+                d="M0 560 Q 120 520 260 600 T 520 640 L0 640Z"
+                fill="#dce6e9"
+                filter="url(#soft-noise)"
+              />
+              <path
+                d="M880 0 Q 900 80 1000 110 L1000 0Z"
+                fill="#dce6e9"
+                filter="url(#soft-noise)"
+              />
+              <path
+                d="M390 300 q 60 -40 120 0 q 30 40 -30 70 q -80 20 -90 -70z"
+                fill="#cfe0e4"
+                filter="url(#soft-noise)"
+              />
+              <g class="map-trees">
+                <path d="M150 94 L166 126 L134 126Z" />
+                <path d="M90 234 L106 266 L74 266Z" />
+                <path d="M280 84 L296 116 L264 116Z" />
+                <path d="M130 174 L146 206 L114 206Z" />
+                <path d="M310 164 L326 196 L294 196Z" />
+                <path d="M180 214 L196 246 L164 246Z" />
+                <path d="M260 224 L276 256 L244 256Z" />
+              </g>
+              <path
+                class="map-route"
+                d="M220 470 C 120 360, 150 240, 230 170 S 450 60, 560 130 S 820 180, 830 290 S 780 470, 650 500 S 380 560, 220 470"
+              />
+              <g class="map-house" data-map-open="cabin" transform="translate(220 470)" role="button" tabindex="0">
+                <ellipse cx="0" cy="34" rx="58" ry="10" />
+                <rect x="-38" y="-10" width="76" height="44" rx="4" />
+                <path d="M-50 -8 L0 -52 L50 -8Z" />
+                <rect class="map-door" x="-10" y="8" width="20" height="26" />
+                <rect class="map-window" x="16" y="2" width="14" height="12" />
+                <rect class="map-label" x="-48" y="44" width="96" height="26" rx="13" />
+                <text y="62">药药的小屋</text>
+              </g>
+              <g class="map-nodes" id="map-nodes"></g>
+              <g class="compass" transform="translate(920 560)">
+                <circle r="34" />
+                <path d="M0 -28 L7 0 L0 28 L-7 0Z" />
+                <text y="-38">北</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <section class="section journey-section" id="journey">
+        <header class="section-heading">
+          <div>
+            <p class="eyebrow">FOUR SCENES</p>
+            <h2>四站旅程</h2>
+          </div>
+          <p>
+            每张场景图都保留原小程序中的闪烁热点位置。点击光点，查看这一件物品想回答的研究问题。
+          </p>
+        </header>
+        <div class="scene-tabs" id="scene-tabs"></div>
+        <div class="scene-explorer">
+          <div class="scene-image-wrap" id="scene-image-wrap"></div>
+          <aside class="scene-copy">
+            <p class="eyebrow" id="scene-stage"></p>
+            <h3 id="scene-title"></h3>
+            <p id="scene-blurb"></p>
+            <div class="scene-meta">
+              <span>角色</span><b id="scene-host"></b>
+              <span>纪念品</span><b id="scene-memento"></b>
+            </div>
+            <div class="hotspot-list" id="hotspot-list"></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section world-section" id="world">
+        <header class="section-heading section-heading-inverse">
+          <div>
+            <p class="eyebrow">ONE LIVING WORLD · 3D</p>
+            <h2>四个场景，合成一座研发世界</h2>
+          </div>
+          <p>
+            四个研究场景围绕小屋展开。拖动旋转整个世界，滚轮缩放，点击发光的研究物件读取解释。
+          </p>
+        </header>
+        <div class="stage-frame world-frame">
+          <canvas id="world-canvas" aria-label="可旋转缩放的四个药学研发场景合并三维世界"></canvas>
+          <div class="world-toolbar">
+            <button type="button" data-world-action="reset">回到全景</button>
+            <button type="button" data-world-action="rotate">自动旋转</button>
+            <button type="button" data-world-action="labels">显示标签</button>
+          </div>
+          <div class="loading-pill" id="world-loading">正在连接四站…</div>
+          <div class="world-legend">
+            <span><i style="background:#89a86e"></i>分子森林</span>
+            <span><i style="background:#c99a64"></i>配方工坊</span>
+            <span><i style="background:#7da5ae"></i>质量星站</span>
+            <span><i style="background:#cf7f6a"></i>临床之城</span>
+          </div>
+        </div>
+        <div class="world-instructions">
+          <span>拖动旋转</span>
+          <span>滚轮缩放</span>
+          <span>点击发光物件</span>
+          <span>可打开四大场景图</span>
+        </div>
+      </section>
+
+      <section class="section endings-section" id="endings">
+        <header class="section-heading">
+          <div>
+            <p class="eyebrow">THREE ENDINGS</p>
+            <h2>药药的三种结局</h2>
+          </div>
+          <p>
+            三张结局纪念卡对应药药旅程的三种结果。
+          </p>
+        </header>
+        <div class="ending-grid" id="ending-grid"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <b>药药的旅程</b>
+        <p>一颗新药的成长日记 · 科普互动演示</p>
+      </div>
+      <p>
+        内容提取自公开小程序网页 thejourneyofanewdrug.lovable.app。
+        本页面用于科普展示，不构成诊疗建议。
+      </p>
+    </footer>
+
+    <div class="modal" id="modal" aria-hidden="true">
+      <button class="modal-backdrop" type="button" data-close-modal aria-label="关闭弹窗"></button>
+      <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <button class="modal-close" type="button" data-close-modal aria-label="关闭">×</button>
+        <div id="modal-content"></div>
+      </section>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
